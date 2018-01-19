@@ -11,10 +11,12 @@ public:
 	explicit HeapArray(const int size);
 	
 	HeapArray(const HeapArray<T>& source);
-	HeapArray(HeapArray<T>&& source) noexcept;
+	HeapArray(HeapArray<T>&& source) noexcept = default;
+
+	~HeapArray() = default;
 	
 	HeapArray<T>& operator=(const HeapArray<T>& source);
-	HeapArray<T>& operator=(HeapArray<T>&& source) noexcept;
+	HeapArray<T>& operator=(HeapArray<T>&& source) noexcept = default;
 	
 	T& operator[](const int index);
 	const T& operator[](const int index) const;
@@ -36,5 +38,5 @@ public:
 
 private:
 	int size = 0;
-	std::unique_ptr<T> array;
+	std::unique_ptr<T[]> array;
 };

@@ -4,7 +4,7 @@ template<typename T>
 HeapArray<T>::HeapArray(const int size)
 	:
 	size{ size },
-	array{ std::make_unique<T>(size) }
+	array{ std::make_unique<T[]>(size) }
 {
 }
 
@@ -15,16 +15,6 @@ HeapArray<T>::HeapArray(const HeapArray<T>& source)
 }
 
 template<typename T>
-HeapArray<T>::HeapArray(HeapArray<T>&& source) noexcept
-	:
-	size{ source.size },
-	array{ source.array }
-{
-	source.size = 0;
-	source.array = nullptr;
-}
-
-template<typename T>
 HeapArray<T>& HeapArray<T>::operator=(const HeapArray<T>& source)
 {
 	if (this != &source)
@@ -32,28 +22,13 @@ HeapArray<T>& HeapArray<T>::operator=(const HeapArray<T>& source)
 		if (size != source.size)
 		{
 			size = source.size;
-			array = std::make_unique<T>(size);
+			array = std::make_unique<T[]>(size);
 		}
 
 		for (int index = 0; index < size; ++index)
 		{
 			(*this)[index] = source[index];
 		}
-	}
-
-	return *this;
-}
-
-template<typename T>
-HeapArray<T>& HeapArray<T>::operator=(HeapArray<T>&& source) noexcept
-{
-	if (this != &source)
-	{
-		size = source.size;
-		array = source.array;
-
-		source.size = 0;
-		source.array = nullptr;
 	}
 
 	return *this;
