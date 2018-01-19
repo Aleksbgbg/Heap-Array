@@ -1,0 +1,2 @@
+# Heap Array
+A C++ implementation of a dynamically-sized (runtime allocated) array, encapsulated in a HeapArray<T> class. Includes modern C++ features, like the use of smart pointers, l-value reference semantics, and templating.
